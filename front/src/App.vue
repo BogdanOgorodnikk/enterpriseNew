@@ -1,0 +1,33 @@
+<template>
+  <div id="app">
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
+</template>
+
+<script>
+import MainLayout from '../src/components/layouts/MainLayout';
+import EmptyLayout from '../src/components/layouts/EmptyLayout';
+
+export default {
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || 'empty') + '-layout'
+    }
+  },
+  mounted() {
+    this.$store.dispatch('auth')
+  },
+  components: {
+    MainLayout,
+    EmptyLayout
+  }
+  
+}
+</script>
+
+<style lang="scss">
+@import 'assets/style/index.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+</style>
